@@ -10,18 +10,34 @@ This is a software development exercise for a Flutter mobile application develop
 
 ## Your task
 
+The current skeleton implements a splash screen and a mock dashboard screen,
+and some example tests.
+
 Your task is to
 
-- Add a Xsolla social media login to the provided Flutter application skeleton
+- Add a login integration to the provided Flutter application skeleton
+  on the profile screen
+
+- Validate all inputs before sending them to the login
 
 - Create and authenticate the user with the given REST backend
+    * This backend is hardcoded to give always the same response
+    * See more details below
 
-- Have an end-to-end test to check it works
+- Add a post-login profile vjew with user name, full name
+  and level
 
-- The current skeleton implements a splash screen and a mock dashboard screen,
-  and a sample e2e test
+- After the authentication is complete, remember the user
+  data in a store and be remember even if the user navigates away from the screen
+    * For this exercise, the login status does not need to be persistent
+    * For this exercise, there is no need for log out button
 
-- Xsolla API keys are given when you receive the exercise assignment
+- Have an end-to-end tests for login
+  * Assume the current mock backend server is running locally, so your PR must contain
+    instructions how to make any necessary manual est up network wiring so that
+    Flutter tests work against the backend
+  * Check for input validation cases as well
+  * Check post-login Profile screen works
 
 ## How to submit the exercise
 
@@ -38,6 +54,7 @@ We will look
 
 - If the instructions were properly followed
 - If the task was correctly completed
+- All tests pass
 - Code quality
 - Code comment quality
 - Pull request commenting quality
@@ -83,6 +100,33 @@ Alternative you can run tests from the command line:
 ```sh
 flutter test
 ```
+
+## Running backend
+
+You can run the backend by
+
+```sh
+cd backend
+npm install
+node index.js
+```
+
+Then you can test the server:
+
+```sh
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data '{"email": "example@example.com", "password":"secret"}' \
+  http://localhost:3000/login
+```
+
+You should get a reply
+
+```json
+{"firstName":"John","lastName":"Appleseed","username":"flurryflutter","level":"100"}
+```
+
+Tested with Node v12.
 
 # Further reading
 
