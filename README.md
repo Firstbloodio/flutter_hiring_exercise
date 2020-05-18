@@ -1,6 +1,6 @@
 # Introduction
 
-This is a software development exercise for a Flutter mobile application developer position. 
+This is a software development exercise for a Flutter mobile application developer position.
 
 - [See the open position description on StackOverflow](https://stackoverflow.com/jobs/391155/flutter-developer-firstblood)
 
@@ -10,7 +10,7 @@ This is a software development exercise for a Flutter mobile application develop
 
 ## Your task
 
-Your task is to 
+Your task is to
 
 - Add a Xsolla social media login to the provided Flutter application skeleton
 
@@ -54,16 +54,37 @@ The local development flow is
 
 # Prerequisites
 
-* You need to understand Flutter SDK, related mobile develpoment tools, UNIX shell, Node.js
+* You need to understand Flutter SDK, related mobile development tools, UNIX shell, Node.js
 
 # Installation
 
-TODO
+* [Install Flutter and run Flutter doctor to ensure you have everything to run an app](https://flutter.dev/docs/get-started/install)
 
-## Running the backend for the development
+* We recommend using Visual Studio Code and Flutter extension for the development
 
-TODO 
+# Development
+
+## Running the app locally
+
+* [Easiest way to run the application is using DevTools from Visual Studio Code](https://flutter.dev/docs/development/tools/devtools/vscode)
+  and target Android emulator
+
+* Run *Flutter Doctor* through Visual Studio Code command palette to ensure your editor is properly set up. You might need also do some extra setup.
+  [Here are instructions for macOS](https://stackoverflow.com/questions/61036745/invalid-arguments-cannot-find-executable-for-null-when-emulated-android-on/61869002#61869002).
+
+* Visual Studio Code will automatically detect the project. Go to VSCode Debug tab and hit the Play button next to *Run app (flutter_hiring_exercise)* and then choose Android emulator as target.
+
+## Running tests
+
+You can choose *Run all tests (flutter_hiring_exercise)* in Visual Studio Code.
+
+Alternative you can run tests from the command line:
+
+```sh
+flutter test
+```
 
 # Further reading
 
 [Flutter getting started](https://flutter.dev/docs/get-started/codelab)
+
