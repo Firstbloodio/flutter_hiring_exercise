@@ -24,8 +24,8 @@ Your task is to
     * This backend is hardcoded to give always the same response
     * See more details below
 
-- Add a post-login profile vjew with user name, full name
-  and level
+- Add a post-login profile view with username, full name
+  and level - please use your design skills with your own discretion
 
 - After the authentication is complete, remember the user
   data in a store and be remember even if the user navigates away from the screen
