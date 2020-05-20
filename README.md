@@ -41,7 +41,9 @@ Your task is to
   
 - Have manual testing instructions for QA
   * Assume an internal testing team will test this feature with limited knowledge on Flutter
-  * The pull request must contain instructions how the team can successfully test the feature in an Android emulator
+  * The pull request must contain instructions how the team can successfully test the feature in an Android emulator\
+    and the backend running on the local host computer
+  * This will also demostrate needed devops understanding how to make configurable builds
 
 ## How to submit the exercise
 
