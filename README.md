@@ -38,6 +38,10 @@ Your task is to
     Flutter tests work against the backend
   * Check for input validation cases as well
   * Check post-login Profile screen works
+  
+- Have manual testing instructions for QA
+  * Assume an internal testing team will test this feature with limited knowledge on Flutter
+  * The pull request must contain instructions how the team can successfully test the feature in an Android emulator
 
 ## How to submit the exercise
 
