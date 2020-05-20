@@ -91,6 +91,15 @@ The local development flow is
 
 * Visual Studio Code will automatically detect the project. Go to VSCode Debug tab and hit the Play button next to *Run app (flutter_hiring_exercise)* and then choose Android emulator as target.
 
+You can also run from the command line:
+
+```sh
+flutter emulators --launch flutter_emulator
+flutter run
+```
+
+Make sure the backend process is running.
+
 ## Running tests
 
 You can choose *Run all tests (flutter_hiring_exercise)* in Visual Studio Code.
