@@ -60,7 +60,8 @@ We will look
 - If the task was correctly completed
 - All tests pass
 - Code quality
-- Code comment quality
+- Code comment quality - for example if there are zero useful comments to make the reader to understand 
+  your code then you will be negatively scored for this
 - Pull request commenting quality
 
 # Project description
