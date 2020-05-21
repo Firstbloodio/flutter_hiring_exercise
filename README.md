@@ -44,6 +44,9 @@ Your task is to
   * The pull request must contain instructions how the team can successfully test the feature in an Android emulator\
     and the backend running on the local host computer
   * This will also demostrate needed devops understanding how to make configurable builds
+  * Please note that the Android emulator lives in a virtual machine and cannot connect to 
+    the host localhost ports by default, so you need to figure out how to pass the correct backend
+    server address so that the testing team can test your app
 
 ## How to submit the exercise
 
