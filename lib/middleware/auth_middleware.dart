@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:redux/redux.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,8 +26,8 @@ class AuthMiddleware {
       Store<AppState> store, AppStarted action, NextDispatcher next) async {
     next(action);
 
-    if (await _hasToken()) {
-      store.dispatch(UserLoaded(user: User(token: await _getToken())));
+    if (await _hasUser()) {
+      store.dispatch(UserLoaded(user: await _getUser()));
     }
   }
 
@@ -36,9 +38,11 @@ class AuthMiddleware {
     try {
       final Map<String, dynamic> authData =
           await authService.login(action.email, action.password);
-      print(authData);
-      _persistToken(authData['token']);
-      store.dispatch(UserLoginSuccess(token: authData['token']));
+      print('from middle $authData');
+      //_persistToken(authData['token']);
+      User user = User.fromJson(authData);
+      _persistUser(user);
+      store.dispatch(UserLoginSuccess(user: user));
     } catch (e) {
       store.dispatch(UserLoginFailure(error: e.toString()));
     }
@@ -48,12 +52,12 @@ class AuthMiddleware {
       NextDispatcher next) async {
     next(action);
 
-    store.dispatch(UserLoaded(user: User(token: action.token)));
+    store.dispatch(UserLoaded(user: action.user));
   }
 
   void _logout(
       Store<AppState> store, UserLogout action, NextDispatcher next) async {
-    await _deleteToken();
+    await _deleteUser();
 
     next(action);
   }
@@ -65,10 +69,13 @@ class AuthMiddleware {
     return prefs.getString('token');
   }
 
-  Future<void> _deleteToken() async {
+  Future<void> _deleteUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('token');
-    print('Token removed');
+    await prefs.remove('firstName');
+    await prefs.remove('lastName');
+    await prefs.remove('userName');
+    await prefs.remove('level');
+    print('User removed');
   }
 
   Future<void> _persistToken(String token) async {
@@ -77,9 +84,27 @@ class AuthMiddleware {
     print('Token: $token');
   }
 
-  Future<bool> _hasToken() async {
+  Future<void> _persistUser(User user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String token = prefs.getString('token') ?? '';
+    await prefs.setString('firstName', user.firstName);
+    await prefs.setString('lastName', user.lastName);
+    await prefs.setString('userName', user.userName);
+    await prefs.setString('level', user.level);
+    print('user name: ${user.userName}');
+  }
+
+  Future<User> _getUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String firstName = prefs.getString('firstName');
+    final String lastName = prefs.getString('lastName');
+    final String userName = prefs.getString('userName');
+    final String level = prefs.getString('level');
+    return User(firstName: firstName,lastName: lastName,userName: userName,level: level);
+  }
+
+  Future<bool> _hasUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String token = prefs.getString('userName') ?? '';
 
     if (token != '') {
       return true;

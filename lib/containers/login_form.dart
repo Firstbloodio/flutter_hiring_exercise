@@ -14,7 +14,7 @@ class LoginForm extends StatefulWidget {
 class LoginFormState extends State<LoginForm> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  Key _formKey;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +95,13 @@ class LoginFormState extends State<LoginForm> {
             child: Text('Login',
                 style: TextStyle(fontSize: 20.0, color: Colors.white)),
             onPressed: () {
-              onLogin(_emailController.text, _passwordController.text);
+              if(_formKey.currentState.validate()){
+                onLogin(_emailController.text, _passwordController.text);
+              }else{
+                Scaffold
+                    .of(context)
+                    .showSnackBar(SnackBar(content: Text('Invalid credential')));
+              }
             },
           );
         }));
@@ -148,6 +154,37 @@ class LoginFormState extends State<LoginForm> {
           }
         });
   }
+}
+
+String _validateEmail(String email) {
+  if (email.isEmpty) {
+    // The email is empty
+    return "Enter email address";
+  }
+  // This is just a regular expression for email addresses
+  String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
+      "\\@" +
+      "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+      "(" +
+      "\\." +
+      "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+      ")+";
+  RegExp regExp = new RegExp(p);
+
+  if (regExp.hasMatch(email)) {
+    // So, the email is valid
+    return null;
+  }
+  // The pattern of the email didn't match the regex above.
+  return 'Email is not valid';
+}
+String validatePassword(String value) {
+  if (value.length == 0) {
+    return 'Password is Required';
+  } else if (value.length < 6) {
+    return 'Password Should be more than 6.';
+  }
+  return null;
 }
 
 typedef OnLoginCallback = Function(String email, String password);
